@@ -5,18 +5,17 @@ $input = fopen("input.txt", "r") or die("Unable to open file!");
 $charArray = str_split(trim(fgets($input)));
 fclose($input);
 
-
+$markerLength = 4;
 $marker = [];
 
 for ($index = 0; $index < count($charArray); $index = $index + 1) {
     $char = $charArray[$index];
 
-    if (count($marker) < 4) {
-        // need 4 chars to determine the start
+    if (count($marker) < $markerLength) {
         array_push($marker, $char);
     } else {
-        // we have 4 characters are they unique?
-        if (count(array_unique($marker)) === 4) {
+        // we have enough characters are they unique?
+        if (count(array_unique($marker)) === $markerLength) {
             die("Index: " . ($index) . "\n");
         } else {
             // remove the first char and add the current char
